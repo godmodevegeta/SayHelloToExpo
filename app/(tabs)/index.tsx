@@ -1,75 +1,54 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+// We are only importing Feather now, which we know exists.
+import { Feather } from '@expo/vector-icons'; 
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView className="flex-1 bg-background">
+      <View className="flex-1 justify-between p-6">
+
+        {/* --- Header --- */}
+        <View className="items-center">
+          <Text className="text-2xl font-bold text-primary">
+            Mission Hub
+          </Text>
+          <Text className="text-base text-text-muted">
+            The Lab for Your Life
+          </Text>
+        </View>
+
+        {/* --- Central "Mission" Card --- */}
+        <View className="bg-card border border-border p-8 rounded-3xl shadow-lg shadow-primary/50">
+          
+          <View className="flex-row items-center">
+            {/* This is the corrected icon section */}
+            <View className="p-3 bg-primary/20 rounded-full">
+              <Feather name="activity" size={24} color="#9370DB" />
+            </View>
+            <Text className="text-xl font-semibold text-text ml-4">
+              Your First Mission
+            </Text>
+          </View>
+
+          <Text className="text-3xl font-bold text-white mt-6">
+            The 7-Day Energy Boost
+          </Text>
+          
+          <Text className="text-base text-text-muted mt-2">
+            Run a simple experiment to find out what truly boosts your afternoon energy.
+          </Text>
+        </View>
+
+        {/* --- CTA Button --- */}
+        <TouchableOpacity className="bg-primary w-full p-5 rounded-full active:scale-95">
+          <Text className="text-center text-lg font-bold text-white">
+            Begin Mission
+          </Text>
+        </TouchableOpacity>
+
+      </View>
+      <StatusBar style="light" />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
